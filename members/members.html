@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<meta content="UBA Group" name="description">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Library Members | Busolwe Public Library Management System</title>
+		<link rel="stylesheet" href="/css/mstyle.css">
+		<link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
+	</head>
+	<body>
+		<nav class="nav-bar fixed">
+			<!-- <img src="img/banner5.jpg"> This is to include the banner image -->
+			<ul class="left">
+				<li class="username">
+					<img src="/img/usrimage.jpg"><span><?php echo ($_SESSION['username']);?></span>
+				</li>
+			</ul>
+			<ul class="right">
+				<li>
+					<div class="nav-form">
+						<form action="/search/search.php" method="post">
+							<input type="search" name="bksearch" id="bksearch" class="search" placeholder="Search for book...">
+							<button type="submit" name="search" id="search"><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+				</li>
+				<li class="logout">
+					<a href="?logout"><i class="fa fa-power-off"></i></a>
+				</li>
+			</ul>
+		</nav>
+		<aside class="side-bar">
+			<nav class="side-nav">
+				<ul class="nav-list">
+					<li>
+						<a href="/checkin">
+							<span class="nav-icon"><i class="fa fa-sign-in"></i></span>User Check in<span class="nav-status"><?php echo($innow); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/borrow">
+							<span class="nav-icon"><i class="fa fa-book"></i></span>Borrow Book<span class="nav-status"><?php echo($nowborrowed); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/internal">
+							<span class="nav-icon"><i class="fa fa-bullseye"></i></span>Internal Borrow<span class="nav-status"><?php echo($nowiborrowed); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/borrowed">
+							<span class="nav-icon"><i class="fa fa-history"></i></span>Borrowed Books<span class="nav-status"><?php echo($curborrowed); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/late">
+							<span class="nav-icon"><i class="fa fa-exclamation"></i></span>Late Books<span class="nav-status"><?php echo($latebooks); ?></span>
+						</a>
+					</li>
+					<li class="active">
+						<a href="/members">
+							<span class="nav-icon"><i class="fa fa-users"></i></span>Library Members
+						</a>
+					</li>
+					<li>
+						<a href="/books">
+							<span class="nav-icon"><i class="fa fa-institution"></i></span>Library Books
+						</a>
+					</li>
+					<li>
+						<a href="/reports">
+							<span class="nav-icon"><i class="fa fa-file-text"></i></span>Reports
+						</a>
+					</li>
+					<li>
+						<a href="/settings">
+							<span class="nav-icon"><i class="fa fa-sliders"></i></span>Account Settings
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</aside>
+		<section class="main-content">
+			<section class="page-content cf">
+				<hgroup class="section-header form-header large">
+					<h3> Add User</h3>
+				</hgroup>
+				<form class="page-form" action="addmember.php" method="post">
+				<span class="error-message" style="text-align:center;"><small><?php echo($errormess);?></small></span>
+					<ul>
+						<li>
+							<input type="text" maxlength="32" name="fname" id="fname" placeholder="First Name">
+						</li>
+						<li>
+							<input type="text" maxlength="32" name="sname" id="sname" placeholder="Surname">
+						</li>
+						<li>
+							<select name="sex" id="sex">
+								<option>Sex</option>
+								<option>Male</option>
+								<option>Female</option>
+							</select> 
+						</li>
+						<li>
+							<input type="number" name="age" id="age" max="99" placeholder="Age">
+						</li>
+						<li>
+							<input type="text" maxlength="32" name="address" id="address" placeholder="Address">
+						</li>
+						<li>
+							<input type="number" name="amount" id="amount" placeholder="Amount">
+						</li>
+						<li>
+							<button type="submit" name="adduser"><i class="fa fa-plus"></i>Add user</button>
+						</li>
+					</ul>
+				</form>
+			</section>
+			<section class="page-content cf">
+				<hgroup class="section-header large">
+					<h3> Library Members</h3>
+				</hgroup>
+				<table class="large">
+					<thead>
+						<th width="70px">User ID</th>
+						<th width="75px">Reg. Date</th>
+						<th width="75px">First Name</th>
+						<th width="75px">Surname</th>
+						<th width="75px">Address</th>
+						<th width="35px">Sex</th>
+						<th width="35px">Age</th>
+						<th width="20px">Status</th>
+						<th width="75px">Expiry Date</th>
+						<th width="75px">Amount</th>
+					</thead>
+					<?php $counter =0;
+					foreach($libmembers as $person) :?>
+					<?php if ($counter == 0 || $counter%2 ==0){
+							echo('<tr class="even">');
+						}
+						else{
+							echo('<tr>');
+						}
+					?>
+						<td><?php echo($person['userid']); ?></td>
+						<td><?php echo($person['regdate']); ?></td>
+						<td><?php echo($person['firstname']); ?></td>
+						<td><?php echo($person['surname']); ?></td>
+						<td><?php echo($person['address']); ?></td>
+						<td><?php echo($person['sex']); ?></td>
+						<td><?php echo($person['age']); ?></td>
+						<?php 
+							if ($person['expiry'] > (date("y-m-d", time()))){
+								echo ('<td class="book-status okay"><span></span></td>');
+							}
+							else{
+								echo ('<td class="book-status over-due"><span></span></td>');
+							}
+						 ?>
+						<td><?php echo($person['expiry']); ?></td>
+						<td><?php echo($person['amount']); $counter +=1; ?></td>
+					</tr>
+					<?php endforeach; ?>
+				</table>
+			</section>
+			<aside class="in-members">
+				<hgroup>
+					<h4>Members Currently in Library</h4>
+				</hgroup>
+				<ul class="user-list">
+				<?php foreach($stillin as $person):?>
+					<li><?php echo($person['username']);?><?php echo('<a href="?checkout='.$person['date'].'">');?><span class="checkout"><i class="fa fa-sign-out"></i></span></a></li>
+				<?php endforeach; ?>
+				</ul>
+			</aside>
+		</section>
+		<!-- Load JavaScript files -->
+	</body>
+</html>

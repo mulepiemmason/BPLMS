@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<meta content="UBA Group" name="description">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Late Books | Busolwe Public Library Management System</title>
+		<link rel="stylesheet" href="/css/mstyle.css">
+		<link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
+	</head>
+	<body>
+		<nav class="nav-bar fixed">
+			<!-- <img src="img/banner5.jpg"> This is to include the banner image -->
+			<ul class="left">
+				<li class="username">
+					<img src="/img/usrimage.jpg"><span><?php echo ($_SESSION['username']);?></span>
+				</li>
+			</ul>
+			<ul class="right">
+				<li>
+					<div class="nav-form">
+						<form action="/search/search.php" method="post">
+							<input type="search" name="bksearch" id="bksearch" class="search" placeholder="Search for book...">
+							<button type="submit" name="search" id="search"><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+				</li>
+				<li class="logout">
+					<a href="?logout"><i class="fa fa-power-off"></i></a>
+				</li>
+			</ul>
+		</nav>
+		<aside class="side-bar">
+			<nav class="side-nav">
+				<ul class="nav-list">
+					<li>
+						<a href="/checkin">
+							<span class="nav-icon"><i class="fa fa-sign-in"></i></span>User Check in<span class="nav-status"><?php echo($innow); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/borrow">
+							<span class="nav-icon"><i class="fa fa-book"></i></span>Borrow Book<span class="nav-status"><?php echo($nowborrowed); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/internal">
+							<span class="nav-icon"><i class="fa fa-bullseye"></i></span>Internal Borrow<span class="nav-status"><?php echo($nowiborrowed); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/borrowed">
+							<span class="nav-icon"><i class="fa fa-history"></i></span>Borrowed Books<span class="nav-status"><?php echo($curborrowed); ?></span>
+						</a>
+					</li>
+					<li class="active">
+						<a href="/late">
+							<span class="nav-icon"><i class="fa fa-exclamation"></i></span>Late Books<span class="nav-status"><?php echo($latebooks); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/members">
+							<span class="nav-icon"><i class="fa fa-users"></i></span>Library Members
+						</a>
+					</li>
+					<li>
+						<a href="/books">
+							<span class="nav-icon"><i class="fa fa-institution"></i></span>Library Books
+						</a>
+					</li>
+					<li>
+						<a href="/reports">
+							<span class="nav-icon"><i class="fa fa-file-text"></i></span>Reports
+						</a>
+					</li>
+					<li>
+						<a href="/settings">
+							<span class="nav-icon"><i class="fa fa-sliders"></i></span>Account Settings
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</aside>
+		<section class="main-content">
+			<!-- Below is the header information reminiscent from the form styling 
+			
+			<div class="head-info">
+				<section class="content-header">
+					<span class="timecurr">AMOUNTS IN UGANDAN SHILLING -- DATE/TIMES ARE GREENWICH MEAN TIME (GMT)</span><br>
+				</section>
+				<section class="left">
+					<select>
+						<option>06/05/2014 - 08/04/2014</option>
+						<option>Today</option>
+						<option>Last 7 days</option>
+						<option>Last Month</option>
+						<option>Previous Month</option>
+					</select>
+				</section>
+				<section class="right">  
+			    <span class="opt">
+			    	<input id="sortorder" name="sortorder" checked="checked" type="checkbox">
+			    	<label for="sortorder">Show Most Recent Transactions First</label>
+			    </span><br>
+			    <span class="opt">
+			    	<input id="transmode" name="transmode" checked="checked" type="checkbox">
+			    	<label for="transmode">Only Show Transactions which affect your balance</label>
+			    </span>
+				</section>
+			</div>
+			
+			-->
+			<section class="page-content cf">
+				<hgroup class="section-header large">
+					<h3> Late Books</h3>
+				</hgroup>
+				<table class="large">
+					<thead>
+						<th width="75px">Book ID</th>
+						<th width="75px">Date</th>
+						<th	width="250px">Title</th>
+						<th width="75px">Due Date</th>
+						<th	width="150px">Borrower Name</th>
+						<th	width="30px">Returned</th>
+					</thead>
+					<?php $counter =0;
+					foreach($lateborrowed as $person) :?>
+					<?php if ($counter == 0 || $counter%2 ==0){
+							echo('<tr class="even">');
+						}
+						else{
+							echo('<tr>');
+						}
+					?>
+						<td><?php echo($person['bookid']); ?></td>
+						<td><?php echo($person['date']); ?></td>
+						<td><?php echo($person['title']); ?></td>
+						<td><?php echo($person['duedate']); ?></td>
+						<td><?php echo($person['borrower']); ?></td>
+						<?php 
+							if ($person['returned'] == 0){
+								echo ('<td><a href="?return&amp;borrowid='.$person['borrowid'].'&amp;bookid='.$person['bookid'].'&amp;page=late" class="table-icon"><span class="table-check"></span></a></td>');
+							}
+							else{
+								echo ('<td><a href="?return&amp;borrowid='.$person['borrowid'].'&amp;bookid='.$person['bookid'].'&amp;page=late" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>');
+							}
+						 $counter +=1; ?>
+					</tr>
+					<?php endforeach; ?>
+					<!-- This is the the for loop to list unreturned Internally borrowed books
+					<?php
+					foreach($lateiborrowed as $person) :?>
+					<?php if ($counter == 0 || $counter%2 ==0){
+							echo('<tr class="even">');
+						}
+						else{
+							echo('<tr>');
+						}
+					?>
+						<td><?php echo($person['bookid']); ?></td>
+						<td><?php echo($person['date']); ?></td>
+						<td><?php echo($person['title']); ?></td>
+						<td><?php echo(date('y-m-d', $person['date'])); ?></td>
+						<td><?php echo($person['username']); ?></td>
+						<?php 
+							if ($person['returned'] == 0){
+								echo ('<td><a href="?return&amp;borrowid='.$person['borrowid'].'&amp;bookid='.$person['bookid'].'&amp;page=late" class="table-icon"><span class="table-check"></span></a></td>');
+							}
+							else{
+								echo ('<td><a href="?return&amp;borrowid='.$person['borrowid'].'&amp;bookid='.$person['bookid'].'&amp;page=late" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>');
+							}
+						 $counter +=1; ?>
+					</tr>
+					<?php endforeach; ?>
+					
+					-->
+				</table>
+			</section>
+			<aside class="in-members">
+				<hgroup>
+					<h4>Members Currently in Library</h4>
+				</hgroup>
+				<ul class="user-list">
+				<?php foreach($stillin as $person):?>
+					<li><?php echo($person['username']);?><?php echo('<a href="?checkout='.$person['date'].'">');?><span class="checkout"><i class="fa fa-sign-out"></i></span></a></li>
+				<?php endforeach; ?>
+				</ul>
+			</aside>
+		</section>
+		<!-- Load JavaScript files -->
+	</body>
+</html>

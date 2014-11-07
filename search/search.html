@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<meta content="UBA Group" name="description">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Search Results | Busolwe Public Library Management System</title>
+		<link rel="stylesheet" href="/css/mstyle.css">
+		<link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
+	</head>
+	<body>
+		<nav class="nav-bar fixed">
+			<!-- <img src="img/banner5.jpg"> This is to include the banner image -->
+			<ul class="left">
+				<li class="username">
+					<img src="/img/usrimage.jpg"><span><?php echo ($_SESSION['username']);?></span>
+				</li>
+			</ul>
+			<ul class="right">
+				<li>
+					<div class="nav-form">
+						<form action="/search/search.php" method="post">
+							<input type="search" name="bksearch" id="bksearch" class="search" placeholder="Search for book...">
+							<button type="submit" name="search" id="search"><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+				</li>
+				<li class="logout">
+					<a href="?logout"><i class="fa fa-power-off"></i></a>
+				</li>
+			</ul>
+		</nav>
+		<aside class="side-bar">
+			<nav class="side-nav">
+				<ul class="nav-list">
+					<li>
+						<a href="/checkin">
+							<span class="nav-icon"><i class="fa fa-sign-in"></i></span>User Check in<span class="nav-status"><?php echo($innow); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/borrow">
+							<span class="nav-icon"><i class="fa fa-book"></i></span>Borrow Book<span class="nav-status"><?php echo($nowborrowed); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/internal">
+							<span class="nav-icon"><i class="fa fa-bullseye"></i></span>Internal Borrow<span class="nav-status"><?php echo($nowiborrowed); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/borrowed">
+							<span class="nav-icon"><i class="fa fa-history"></i></span>Borrowed Books<span class="nav-status"><?php echo($curborrowed); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/late">
+							<span class="nav-icon"><i class="fa fa-exclamation"></i></span>Late Books<span class="nav-status"><?php echo($latebooks); ?></span>
+						</a>
+					</li>
+					<li>
+						<a href="/members">
+							<span class="nav-icon"><i class="fa fa-users"></i></span>Library Members
+						</a>
+					</li>
+					<li>
+						<a href="/books">
+							<span class="nav-icon"><i class="fa fa-institution"></i></span>Library Books
+						</a>
+					</li>
+					<li>
+						<a href="/reports">
+							<span class="nav-icon"><i class="fa fa-file-text"></i></span>Reports
+						</a>
+					</li>
+					<li>
+						<a href="/settings">
+							<span class="nav-icon"><i class="fa fa-sliders"></i></span>Account Settings
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</aside>
+		<section class="main-content">
+			<section class="page-content cf">
+				<hgroup class="section-header large">
+					<h3> Search Results</h3>
+				</hgroup>
+				<?php 
+					if($totalall == 0){
+						echo('<br><hgroup class="section-header form-header large">
+										<h3> Sorry The Book You searched for doesn\'t exist in the library</h3>
+									</hgroup>');
+					}
+					else{
+						echo('<table class="large">
+										<thead>
+											<th width="70px">Book ID</th>
+											<th width="75px">Reg. Date</th>
+											<th width="230px">Title</th>
+											<th width="75px">Category</th>
+											<th width="130px">Author</th>
+											<th width="30px">Borrowed</th>
+											<th width="30px">Late</th>
+											<th width="30px">Available</th>
+										</thead>');
+						echo('<td>'.$bookresult['bookid'].'</td>
+									<td>'.$bookresult['regdate'].'</td>
+									<td>'.$bookresult['title'].'</td>
+									<td>'.$bookresult['category'].'</td>
+									<td>'.$bookresult['author'].'</td>');
+						if(isset($totalborrowed)){
+							echo('<td>'.$totalborrowed.'</td>');
+						}
+						else{
+							echo('<td>0</td>');
+						}
+						if(isset($totallate)){
+							echo('<td>'.$totallate.'</td>');
+						}
+						else{
+							echo('<td>0</td>');
+						}	
+						if ($bookresult['quantity'] == 0){
+							echo ('<td class="book-status over-due"><span>'.$bookresult['quantity'].'</span></td>');
+						}
+						else{
+							echo ('<td class="book-status okay"><span>'.$bookresult['quantity'].'</span></td>');
+						}
+						echo('</table>');
+					}
+				?>
+				<!-- Below is a form that might be utilised in the later stages of the App's development
+				
+				<form class="page-form" action="borrow.php" method="post">
+				<span class="error-message" style="text-align:center;"><small><?php echo($errormess);?></small></span>
+					<ul>
+						<li>
+							<input type="text" maxlength="32" name="userid" id="userid" placeholder="User ID">
+						</li>
+						<li>
+							<input type="text" maxlength="32" name="bkid" id="bkid" placeholder="Book ID">
+						</li>
+						<li>
+							<input type="number" name="duration" id="duration" placeholder="Borrowing Duration in days" max="14" min="0">
+						</li>
+						<li>
+							<button type="submit" name="bborrow"><i class="fa fa-share-square-o"></i>Borrow Book</button>
+						</li>
+					</ul>
+				</form>
+				
+				-->
+			</section>
+			
+			<!-- Below is the section containing all the borrowed books relating to the search -->
+			
+			<section class="page-content cf">
+				<hgroup class="section-header form-header large">
+					<h3> Borrowed Books</h3>
+				</hgroup>
+				<?php 
+					if($totalall != 0 && $totalborrowed == 0){
+						echo('<br><hgroup class="section-header form-header large">
+										<h3> Sorry The Book You searched for has not yet been borrowed</h3>
+									</hgroup>');
+					}
+					elseif($totalall == 0){
+						echo('<br><hgroup class="section-header form-header large">
+										<h3> Sorry The Book You searched for doesn\'t exist in the library</h3>
+									</hgroup>');
+					}
+					else{
+						$counter =0;
+						echo('<table class="large">
+										<thead>
+											<th width="70px">Book ID</th>
+											<th width="75px">Date</th>
+											<th	width="230px">Title</th>
+											<th width="75px">Due Date</th>
+											<th width="20px">Status</th>
+											<th	width="150px">Borrower Name</th>
+											<th	width="30px">Returned</th>
+										</thead>');
+						foreach($borrowedresult as $book){
+							if ($counter == 0 || $counter%2 ==0){
+								echo('<tr class="even">');
+							}
+							else{
+								echo('<tr>');
+							}
+							echo('<td>'.$book['bookid'].'</td>
+										<td>'.$book['date'].'</td>
+										<td>'.$book['title'].'</td>
+										<td>'.$book['duedate'].'</td>');
+							if ($book['returned'] == 0 && $book['duedate'] == $book['date']){
+								echo ('<td class="book-status soon"><span></span></td>');
+							}
+							elseif ($book['returned'] == 0 && $book['duedate'] < $book['date']){
+								echo ('<td class="book-status over-due"><span></span></td>');
+							}
+							else{
+								echo ('<td class="book-status okay"><span></span></td>');
+							}
+							echo('<td>'.$book['borrower'].'</td>');
+							if ($book['returned'] == 0){
+								echo ('<td><a href="?return&amp;borrowid='.$book['borrowid'].'&amp;bookid='.$book['bookid'].'&amp;page=search" class="table-icon"><span class="table-check"></span></a></td>');
+							}
+							else{
+								echo ('<td><a href="?return&amp;borrowid='.$book['borrowid'].'&amp;bookid='.$book['bookid'].'&amp;page=search" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>');
+							}
+							$counter +=1;
+						}
+						echo('</table>');
+					}
+				?>
+			</section>
+			
+			<!-- Below is the section containing all the late books relating to the search this might be filled in later just incase the Library Needs it 
+			
+			<section class="page-content cf">
+				<hgroup class="section-header form-header large">
+					<h3> Late Books</h3>
+				</hgroup>
+				<?php 
+					if($totalall != 0 && $lateborrowed == 0){
+						echo('<br><hgroup class="section-header form-header large">
+										<h3> There are no late books relating to this search</h3>
+									</hgroup>');
+					}
+					elseif($totalall == 0){
+						echo('<br><hgroup class="section-header form-header large">
+										<h3> Sorry The Book You searched for doesn\'t exist in the library</h3>
+									</hgroup>');
+					}
+					else{
+						$counter =0;
+						echo('<table class="large">
+										<thead>
+											<th width="70px">Book ID</th>
+											<th width="75px">Date</th>
+											<th	width="230px">Title</th>
+											<th width="75px">Due Date</th>
+											<th width="20px">Status</th>
+											<th	width="150px">Borrower Name</th>
+											<th	width="30px">Returned</th>
+										</thead>');
+						foreach($lateresult as $book){
+							if ($counter == 0 || $counter%2 ==0){
+								echo('<tr class="even">');
+							}
+							else{
+								echo('<tr>');
+							}
+							echo('<td>'.$book['bookid'].'</td>
+										<td>'.$book['date'].'</td>
+										<td>'.$book['title'].'</td>
+										<td>'.$book['duedate'].'</td>');
+							if ($book['returned'] == 0 && $book['duedate'] == $book['date']){
+								echo ('<td class="book-status soon"><span></span></td>');
+							}
+							elseif ($book['returned'] == 0 && $book['duedate'] < $book['date']){
+								echo ('<td class="book-status over-due"><span></span></td>');
+							}
+							else{
+								echo ('<td class="book-status okay"><span></span></td>');
+							}
+							echo('<td>'.$book['borrower'].'</td>');
+							if ($book['returned'] == 0){
+								echo ('<td><a href="?return&amp;borrowid='.$book['borrowid'].'&amp;bookid='.$book['bookid'].'&amp;page=search" class="table-icon"><span class="table-check"></span></a></td>');
+							}
+							else{
+								echo ('<td><a href="?return&amp;borrowid='.$book['borrowid'].'&amp;bookid='.$book['bookid'].'&amp;page=search" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>');
+							}
+							$counter +=1;
+						}
+						echo('</table>');
+					}
+				?>
+			</section>
+			
+			-->
+			<aside class="in-members">
+				<hgroup>
+					<h4>Members Currently in Library</h4>
+				</hgroup>
+				<ul class="user-list">
+				<?php foreach($stillin as $person):?>
+					<li><?php echo($person['username']);?><?php echo('<a href="?checkout='.$person['date'].'">');?><span class="checkout"><i class="fa fa-sign-out"></i></span></a></li>
+				<?php endforeach; ?>
+				</ul>
+			</aside>
+		</section>
+		<!-- Load JavaScript files -->
+	</body>
+</html>

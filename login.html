@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<meta content="UBA Group Login" name="description">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Login | UBA</title>
+		<link rel="stylesheet" href="css/style.css">
+		<link rel="stylesheet" href="fonts/font-awesome/css/font-awesome.min.css">
+	</head>
+	<body>
+		<nav class="WebPanel1"></nav>
+		<section class="login-panel">
+				<hgroup class="logo">
+					<h3>Busolwe Public Library</h3>
+					<h6><?php echo ($error);?></h6>
+				</hgroup>
+				<form name="login-form" method="post" action="?login">
+					<ul class="form-list stacked">
+						<li class="field">
+							<button type="button"><i class="icon fa fa-user"></i></button>
+	            <input name="username" maxlength="32" id="username" type="text" placeholder="User Name">
+						</li>
+						<li class="field">  
+							<button type="button"><i class="icon fa fa-lock"></i></button>      
+	            <input name="pass" maxlength="32" id="pass" type="password" placeholder="Password">
+						</li>
+						<li class="footer"> 
+							<input type="submit"  name="btnLogin" id="btnLogin" value="Login">
+						</li>
+					</ul>
+				</form>
+		</section>
+	</body>
+</html>

@@ -1,0 +1,496 @@
+@font-face {
+    font-family: 'open_sanslight';
+    src: url('/fonts/OpenSans-Light-webfont.eot');
+    src: url('/fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/OpenSans-Light-webfont.woff') format('woff'),
+         url('/fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('/fonts/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('/fonts/OpenSans-Regular-webfont.eot');
+    src: url('/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('/fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body{
+	margin : 0;
+	font: 1em open_sansregular, sans-serif, 'Lucinda Grande';
+	background: #f0f0f3;
+}
+.clearfix::after {
+	content: ".";
+	display:block; 
+	font-size:0; 
+	line-height:0; 
+	height:0; 
+	clear:both; 
+	visibility:hidden; 
+}
+.clearfix { 
+	display:inline-block; 
+}		
+* html .clearfix { 
+	height:1%; 
+}
+.clearfix { 
+	display:block; 
+}
+.cf{
+	clear: both;
+	padding-top: 5px;
+}
+	.nav-bar {
+		height: 45px;
+		background: #40c4de;
+		width: 85%;
+		color: #393838;
+		padding-left: 15%;
+		z-index: 2;
+	}
+		.nav-bar.fixed{
+			position: fixed;
+			top: 0px;
+		}
+		.nav-bar ul{
+			list-style: none;
+			font-size: 1em;
+			margin: 0px auto;
+		}
+			.nav-bar ul li{
+				padding-top: 5px;
+				display: inline-block;
+				padding-left: 20px;
+				margin-right: -3px;
+				height: 43px;
+				padding-right: 20px;
+			}
+			.nav-bar ul li.header,.nav-bar ul li.header:hover,.nav-bar ul li.divider,.nav-bar ul li.divider:hover{
+				background: rgba(255,255,255,0);
+			}
+			
+			.nav-bar ul li.username{
+				
+			}
+			.nav-bar ul li.username{
+				font-size: 0.9em;
+				color: #ffffff;
+			}
+				.nav-bar ul li.username span{
+					padding-top: 10px;
+					display: inline-block;
+				}
+				.nav-bar ul li.username img{
+					float: left;
+					margin-right: 10px;
+				}
+			.nav-bar ul li i{
+				font-size: 1.4em;
+			}
+			.nav-bar ul li a{
+				color: #ffffff;
+				text-decoration: none;
+			}
+			.nav-bar ul li a:hover{
+				color: #ffffff;
+			}
+			.nav-bar ul.left{
+				padding-right: 0px;
+				float: left;
+			}
+			.nav-bar ul.right{
+				padding-right: 0px;
+				float: right;
+			}
+			
+			.nav-bar ul.right input[type='search'], nav-bar ul.right form input.search{
+				display: inline-block;
+				width: 150px;
+				height: 22px;
+				border: 0px;
+				border-radius: 1px;
+				color: #596164;
+				font-size: 0.8em;
+				padding-left: 15px;
+				margin-right: 0px;
+				border-right: 0px;
+			}
+			.nav-bar ul.right button[type='submit']{
+				width: 33px;
+				height: 25px;
+				border: 0px solid #d4d4d4 ;
+				border-radius: 1px;
+				background: rgba(253,253,253,0.63);
+				color: #ffffff;
+				font-size: 0.64em;
+				margin-left: -4px;
+				line-height: 0.8;
+				padding-bottom: 3px;
+				text-align: center;
+			}
+			.nav-bar ul.right li.logout{
+				padding-right: 35px;
+				float: right;
+				padding-top: 8px;
+			}
+			.nav-bar ul.right li.logout a i{
+			}
+	
+	table {
+		border-collapse: collapse;
+		margin: 0px auto;
+	}
+		table,table th, table td{
+			border: 0px solid #d6d6d6;
+			text-align: center;
+			padding-left: 10px;
+			padding-right: 5px;
+		}
+		table th, table td{
+			padding: 7px 5px 7px 10px; 
+			font-size: 0.75em;
+			font-weight:500;
+		}
+		table tr{
+			background: #ffffff;
+			color: #646464;
+		} 
+		table tr td{
+			border-bottom: 1px solid #d6d6d6;
+		}
+			table tr td.book-status span{
+				display: inline-block;
+				font-size: 1em;
+				width: 30px;
+				height: 15px;
+				margin-right: 1px;
+				padding-top: 2px;
+				text-align: center;
+				border-radius: 3px;
+				color: #ffffff;
+			}
+				table tr td.book-status.over-due span{
+					background: #ef4031;
+				} 
+				table tr td.book-status.soon span{
+					background: #f89417;
+				} 
+				table tr td.book-status.okay span{
+					background: #81c405;
+				} 
+		table tr a{
+			color: #6f6f6f;
+		}
+		table tr a{
+			color: #6f6f6f;
+		}
+		table tr a.table-icon{
+			margin-left: 13px;
+		}
+		table tr span.table-check{
+			display: inline-block;
+			font-size: 1em;
+			width: 21px;
+			height: 20px;
+			margin-right: 1px;
+			padding-top: 2px;
+			text-align: center;
+			color: #ffffff;
+			background: #3d3c42;
+		}
+		table th{
+			background: #3d3c42;
+			border: 0px solid #cfcfcf;
+			color: #ffffff; 
+		}
+		table th a{
+			color: #4a4a4a; 
+		}
+		table tr.even{
+			padding: 10px 5px 10px 10px;
+			background: #fbfbfb;
+		}
+		table + section.table-footer {
+			border-bottom: 1px solid #d6d6d6;
+			border-top: 0px;
+			margin-top: 0px;
+			padding-top: 0px;
+			padding-bottom: opx;
+		}
+		table.large + section.table-footer {
+			width: 768px;
+		}
+			table + section.table-footer section {
+				display: inline-block;
+				padding: 8px 5px 8px 10px;
+			}
+			table + section.table-footer section.left-table-sec{
+				padding-left: 20px;
+			}
+				table + section.table-footer section.left-table-sec span.apply {
+					font-size: 0.8em;
+					line-height: 1.2;
+					color: #6f6f6f;
+				}
+				table + section.table-footer section.left-table-sec select.actions {
+					font-size: 0.8em;
+					height: 22px;
+					border: 1px solid #d9d9d9;
+					border-radius: 0px;
+					width: 100px;
+				}
+			table + section.table-footer section.right-table-sec{
+				margin-left: 105px;
+			}
+			table.large + section.table-footer section.right-table-sec{
+				margin-left: 528px;
+			}	
+				table + section.table-footer section.right-table-sec a {
+					color: #6f6f6f;
+				}
+				table + section.table-footer section.right-table-sec a:hover {
+					color: #545454;
+				}
+				table + section.table-footer section.right-table-sec span.pagination{
+					display: inline-block;
+					font-size: 0.8em;
+					width: 24px;
+					height: 23px;
+					margin-right: 1px;
+					padding-top: 2px;
+					text-align: center;
+					color: #ffffff;
+					background: #3d3c42;
+				}
+				table + section.table-footer section.right-table-sec span.pagination:hover, table + section.table-footer section.right-table-sec span.pagination.current, table + section.table-footer section.right-table-sec span.pagination.caret{
+					background: #40c4de;
+				}
+				
+	aside.side-bar{
+		width: 230px;
+		border-right: 0px solid #d9d9d9;
+		height: 744px;
+		background:  #3d3c42;
+		position: fixed;
+		top: 0px;
+		margin-top: -4px;
+		font-size: 0.8rem;
+		color: #ffffff;
+		z-index: 3
+	}	
+		aside nav.side-nav{
+			margin-top: -16px;
+			padding: 0px;
+			
+		}
+		aside nav.side-nav ul{
+			list-style: none;
+			padding-left: 13px;
+			padding-top: 0px;
+		}
+		aside nav.side-nav ul.nav-list{
+			margin-top: 200px;
+		}
+			
+			aside nav.side-nav ul.nav-list li{
+				padding-top: 12px;
+				margin: 0px 0px 0px -13px;
+				border-bottom: 0px solid #d9d9d9;
+				line-height: 1.1;
+				padding-left: 5px;
+			}
+			aside nav.side-nav ul.nav-list li:hover, aside nav.side-nav ul.nav-list li.active{
+				background: #2d2c30;
+				color: #ffffff;
+				border: 0px;
+				padding-left: 0px;
+				border-left: 5px solid #41c4de;
+			}
+				aside nav.side-nav ul.nav-list li:hover a, aside nav.side-nav ul.nav-list li.active a{
+						color: #ffffff;
+				}
+				aside nav.side-nav ul.nav-list li:hover .nav-icon, aside nav.side-nav ul.nav-list li.active .nav-icon{
+						color: #41c4de;
+				}
+				aside nav.side-nav ul.nav-list li a{
+					display: inline-block;
+					width: 100%;
+					height: 25px;
+					color: #ffffff;
+					text-decoration: none;
+					vertical-align: bottom;
+					padding-left: 1em;
+				}
+					aside nav.side-nav ul.nav-list li a span.nav-icon{
+						
+						display: block;
+						float: left;
+						margin: -12px 5px auto 0px;
+						padding: 5px 5px 7px 3px;
+						height: 25px;
+						width: 26px;
+						font-size: 1.8em;
+					}
+					aside nav.side-nav ul.nav-list li a span.nav-status{
+						display: inline-block;
+						width: 22px;
+						height: 12px;
+						text-align: center;
+						border-radius: 3px;
+						float: right;
+						margin: -5px 20px auto 0px;
+						padding: 5px 3px 7px 6px;
+						background: #41c4de;
+						font-size: 1em;
+					}
+
+	section.main-content{
+		margin: 55px 0px auto 243px;
+	}
+	section.main-content section.page-content section.content-header{
+		padding-left: 250px;
+	}
+	 section.main-content section.page-content section.right{
+		width: 650px;
+		margin: auto 100px auto auto;
+	}
+	section.main-content section.page-content section.left{
+		width: 270px;
+		margin: auto 40px auto 30px;
+	}
+			section.main-content section.page-content hgroup.section-header{
+				text-align: center; 
+				color: #545454;
+				line-height: 0.2;
+			}
+			section.main-content section.page-content hgroup.section-header h3{
+				font-weight: lighter;
+				font-size: 1.2em;
+			}
+			section.main-content section.page-content hgroup.section-header.form-header h3{
+				font-weight: lighter;
+				font-size: 1em;
+			}
+			section.main-content section section.content-holder{
+				 
+			}
+				section.main-content section.page-content table.large{
+					margin: 0px 0px; 
+				}
+				section.main-content section.page-content form.page-form{
+					margin: 0px auto; 
+					width: 330px;
+				}
+				section.main-content section.page-content form.page-form ul{
+					list-style: none;
+					padding: 0px;
+					margin: 0px;
+				}
+					section.main-content section.page-content form.page-form input, section.main-content section.page-content form.page-form select,
+					section.main-content section.page-content form.page-form button{
+						width: 80%;
+						height: 30px;
+						font-size: 0.9em;
+						text-align: center;
+						border: 1px solid #e0e0e0;
+						border-radius: 1px;
+						color: #596164;
+						margin: 2px 40px;
+					}
+					section.main-content section.page-content form.page-form select, section.main-content section.page-content form.page-form button[type='submit']{
+						width: 81.2%;
+					}
+					section.main-content section.page-content form.page-form button[type='submit']{
+						background: #f66a40;
+						border: 0px;
+						color: #ffffff;
+						border-radius: 2px;
+					}
+						section.main-content section.page-content form.page-form button[type='submit'] i{
+							padding-right: 10px;
+						}
+		section.main-content section.left{
+			float: left;
+		}
+		
+		section.main-content section.right{
+			float: right;
+		}
+		section.main-content section.page-content{
+			padding: 10px;
+			margin-bottom: 10px;
+			width: 770px;
+			background: #ffffff;
+			border-radius: 1px;
+			border-top: 3px solid #41c4de;
+		}
+		
+			section.main-content	aside.in-members{
+				width: 235px;
+				border-right: 0px solid #d9d9d9;
+				height: 694px;;
+				background:  #ffffff;
+				position: fixed;
+				top: 49px;
+				right: 0px;
+				margin-top: -5px; 
+				font-size: 0.8rem;
+				color: #616060;
+			}	
+				section.main-content	aside.in-members hgroup{
+					margin-top: -16px;
+					padding-left: 20px;
+					background: #f66a40;
+					height: 35px;
+					line-height: 2.7;
+					color: #ffffff;
+				}
+				section.main-content	aside.in-members hgroup h4{
+					font-weight: lighter;
+				}
+				section.main-content	aside.in-members ul{
+					list-style: none;
+					padding-left: 13px;
+					font-weight: thin;
+					padding-top: 0px;
+				}	
+					section.main-content	aside.in-members ul li{
+						padding-top: 6px;
+						padding-bottom: 6px;
+						margin: 0px 40px 0px 0px;
+						border-bottom: 1px solid #d9d9d9;
+						line-height: 1.1;
+						padding-left: 5px;
+					}
+					section.main-content	aside.in-members ul span.checkout{
+						color: #ffffff;
+						background: #3d3c42;
+						padding: 5px 3px 2px 3px;
+						display: block;
+						font-size: 1.2em;
+						margin-bottom: 0px;
+						margin-right: -25px;
+						float: right;
+						height: 16px;
+						width: 17px;
+						margin-top: -4px;
+						line-height: 0.8;
+						text-align: center;
+					}
+						section.main-content	aside.in-members ul li a{
+							width: 100%;
+							height: 25px;
+							color: #616060;
+							text-decoration: none;
+							vertical-align: bottom;
+						}
+	

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf8">
+		<meta content="UBA Group" name="description">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Borrowed Books | Busolwe Public Library Management System</title>
+		<link rel="stylesheet" href="/css/mstyle.css">
+		<link rel="stylesheet" href="/fonts/font-awesome/css/font-awesome.min.css">
+	</head>
+	<body>
+		<nav class="nav-bar fixed">
+			<!-- <img src="img/banner5.jpg"> This is to include the banner image -->
+			<ul class="left">
+				<li class="username">
+					<img src="/img/usrimage.jpg"><span>Jovan  Mulepi</span>
+				</li>
+			</ul>
+			<ul class="right">
+				<li>
+					<div class="nav-form">
+						<form action="search.php" method="post">
+							<input type="search" name="bksearch" id="bksearch" class="search" placeholder="Search for book...">
+							<button type="submit" name="search" id="search"><i class="fa fa-search"></i></button>
+						</form>
+					</div>
+				</li>
+				<li class="logout">
+					<a href="?logout"><i class="fa fa-power-off"></i></a>
+				</li>
+			</ul>
+		</nav>
+		<aside class="side-bar">
+			<nav class="side-nav">
+				<ul class="nav-list">
+					<li>
+						<a href="/checkin">
+							<span class="nav-icon"><i class="fa fa-sign-in"></i></span>User Check in<span class="nav-status">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/borrow">
+							<span class="nav-icon"><i class="fa fa-book"></i></span>Borrow Book<span class="nav-status">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/internal">
+							<span class="nav-icon"><i class="fa fa-bullseye"></i></span>Internal Borrow<span class="nav-status">1</span>
+						</a>
+					</li>
+					<li class="active">
+						<a href="/borrowed">
+							<span class="nav-icon"><i class="fa fa-history"></i></span>Borrowed Books<span class="nav-status">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/late">
+							<span class="nav-icon"><i class="fa fa-exclamation"></i></span>Late Books<span class="nav-status">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/members">
+							<span class="nav-icon"><i class="fa fa-users"></i></span>Library Members<span class="nav-status">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/books">
+							<span class="nav-icon"><i class="fa fa-institution"></i></span>Library Books<span class="nav-status">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/reports">
+							<span class="nav-icon"><i class="fa fa-file-text"></i></span>Reports<span class="nav-status">1</span>
+						</a>
+					</li>
+					<li>
+						<a href="/settings">
+							<span class="nav-icon"><i class="fa fa-sliders"></i></span>Account Settings<span class="nav-status">1</span>
+						</a>
+					</li>
+				</ul>
+			</nav>
+		</aside>
+		<section class="main-content">
+			<!-- Below is the header information reminiscent from the form styling 
+			
+			<div class="head-info">
+				<section class="content-header">
+					<span class="timecurr">AMOUNTS IN UGANDAN SHILLING -- DATE/TIMES ARE GREENWICH MEAN TIME (GMT)</span><br>
+				</section>
+				<section class="left">
+					<select>
+						<option>06/05/2014 - 08/04/2014</option>
+						<option>Today</option>
+						<option>Last 7 days</option>
+						<option>Last Month</option>
+						<option>Previous Month</option>
+					</select>
+				</section>
+				<section class="right">  
+			    <span class="opt">
+			    	<input id="sortorder" name="sortorder" checked="checked" type="checkbox">
+			    	<label for="sortorder">Show Most Recent Transactions First</label>
+			    </span><br>
+			    <span class="opt">
+			    	<input id="transmode" name="transmode" checked="checked" type="checkbox">
+			    	<label for="transmode">Only Show Transactions which affect your balance</label>
+			    </span>
+				</section>
+			</div>
+			
+			-->
+			<section class="page-content cf">
+				<hgroup class="section-header large">
+					<h3> Borrowed Books</h3>
+				</hgroup>
+				<table class="large">
+					<thead>
+						<th width="70px">Book ID</th>
+						<th width="75px">Date</th>
+						<th	width="230px">Title</th>
+						<th width="75px">Due Date</th>
+						<th width="20px">Status</th>
+						<th	width="150px">Borrower Name</th>
+						<th	width="30px">Returned</th>
+					</thead>
+					<tr>
+						<td>103236514</td>
+						<td>08-04-2014</td>
+						<td>500,000 </td>
+						<td>0 </td>
+						<td class="book-status over-due"><span></span></td>
+						<td>500,126 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>103178531</td>
+						<td>08-02-2014</td>
+						<td>(110,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status soon"><span></span></td>
+						<td>126 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>103097910</td>
+						<td>08-01-2014</td>
+						<td>(90,000)</td>
+						<td>(1,500)</td>
+						<td class="book-status soon"><span></span></td>
+						<td>112,126 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102967745</td>
+						<td>07-29-2014</td>
+						<td>(100,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status soon"><span></span></td>
+						<td>203,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>102849022</td>
+						<td>07-26-2014</td>
+						<td>(100,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status okay"><span></span></td>
+						<td>305,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102832916</td>
+						<td>07-26-2014</td>
+						<td>(50,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status over-due"><span></span></td>
+						<td>407,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>102815045</td>
+						<td>07-25-2014</td>
+						<td>(120,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status okay"><span></span></td>
+						<td>459,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102794876</td>
+						<td>07-25-2014</td>
+						<td>(120,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status soon"><span></span></td>
+						<td>581,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>102678060</td>
+						<td>07-24-2014</td>
+						<td>(50,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status okay"><span></span></td>
+						<td>703,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102677332</td>
+						<td>07-23-2014</td>
+						<td>(100,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status soon"><span></span></td>
+						<td>755,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>102673781</td>
+						<td>07-23-2014</td>
+						<td>(100,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status okay"><span></span></td>
+						<td>857,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102651926</td>
+						<td>07-23-2014</td>
+						<td>850,000 </td>
+						<td>0 </td>
+						<td class="book-status okay"><span></span></td>
+						<td>959,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>102650399</td>
+						<td>07-23-2014</td>
+						<td>100,000 </td>
+						<td>0 </td>
+						<td class="book-status okay"><span></span></td>
+						<td>109,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102565797</td>
+						<td>07-21-2014</td>
+						<td>4,949 </td>
+						<td>0 </td>
+						<td class="book-status over-due"><span></span></td>
+						<td>9,626 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>102525112</td>
+						<td>07-20-2014</td>
+						<td>(20,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status soon"><span></span></td>
+						<td>4,676 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102525097</td>
+						<td>07-20-2014</td>
+						<td>(20,000)</td>
+						<td>(2,000)</td>
+						<td class="book-status okay"><span></span></td>
+						<td>26,676 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>102524385</td>
+						<td>07-20-2014</td>
+						<td>(50,000)</td>
+						<td>(1,000)</td>
+						<td class="book-status okay"><span></span></td>
+						<td>48,676 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102518414</td>
+						<td>07-19-2014</td>
+						<td>(5,229)</td>
+						<td>(143)</td>
+						<td class="book-status okay"><span></span></td>
+						<td>99,676 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+					<tr>
+						<td>102518413</td>
+						<td>07-19-2014</td>
+						<td>5,219 </td>
+						<td>143 </td>
+						<td class="book-status okay"><span></span></td>
+						<td>105,049 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"></span></a></td>
+					</tr>
+					<tr class="even">
+						<td>102516740</td>
+						<td>07-19-2014</td>
+						<td>(70,000)</td>
+						<td>(1,000)</td>
+						<td class="book-status over-due"><span></span></td>
+						<td>99,686 </td>
+						<td><a href="?return&amp;borrowid=12&amp;bookid=12" class="table-icon"><span class="table-check"><i class="fa fa-check"></i></span></a></td>
+					</tr>
+				</table>
+				<section class="table-footer">
+					<section class="left-table-sec">
+						<!-- Actions can be added to the left section of the table footer
+						
+							<span class="apply">Apply action</span>
+							<select class="actions" name="actions" id="actions">
+								<option class="action">Delete</option>
+								<option class="action">Edit</option>
+							</select>
+							
+						-->
+					</section>
+					<section class="right-table-sec">
+						<a href="?previous&amp;page='borrowed.html'"> <span class="pagination caret"><i class="fa fa-chevron-left"></i></span></a>
+						<a href="?page=1&amp;page='borrowed.html'"> <span class="pagination">1</i></span></a>
+						<a href="?page=2&amp;page='borrowed.html'"> <span class="pagination">2</i></span></a>
+						<a href="?page=3&amp;page='borrowed.html'"> <span class="pagination">3</i></span></a>...
+						<a href="?page=10&amp;page='borrowed.html'"> <span class="pagination">10</i></span></a>
+						<a href="?next&amp;page='borrowed.html'"> <span class="pagination caret"><i class="fa fa-chevron-right"></i></span></a>
+					</section>
+				</section>
+			</section>
+			<aside class="in-members">
+				<hgroup>
+					<h4>Members Currently in Library</h4>
+				</hgroup>
+				<ul class="user-list">
+					<li>Magadi Joseph<a href="checkout?userid=12"><span class="checkout"><i class="fa fa-sign-out"></i></span></a></li>
+					<li>Namubirwa Joan<a href="checkout?userid=12"><span class="checkout"><i class="fa fa-sign-out"></i></span></a></li>
+					<li>Mulepi Asad<a href="checkout?userid=12"><span class="checkout"><i class="fa fa-sign-out"></i></span></a></li>
+					<li>Werikhe Hasifa<a href="checkout?userid=12"><span class="checkout"><i class="fa fa-sign-out"></i></span></a></li>
+					<li>Muhamud Said<a href="checkout?userid=12"><span class="checkout"><i class="fa fa-sign-out"></i></span></a></li>
+				</ul>
+		</aside>
+		</section>
+		<!-- Load JavaScript files -->
+	</body>
+</html>
